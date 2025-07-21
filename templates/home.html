@@ -1,0 +1,61 @@
+{% extends 'onepage_noMenu_layout.html' %}
+{% load static %}
+
+{% block styles %}
+<style>
+    #API-List {
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+    }
+    .API-Box {
+        /* inner content */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        /* scaling */
+        flex: 1 1 200px;
+        min-width: 150px;
+        max-width: 250px;
+        aspect-ratio: 1 / 1;
+        background-color: var(--default-background-color-light);
+        border-radius: 40px;
+    }
+    .API-Box > a > img {
+        width: 90%;
+        max-height: 200px;
+    }
+    .API-Box > a {
+        text-decoration: none;
+    }
+    .API-Box > a > p {
+        margin: 2px 0px;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--default-color-light);
+    }
+    @media (prefers-color-scheme: dark) {
+        .API-Box > a > p { color: var(--default-color-dark); }
+        .API-Box { background-color: var(--default-background-color-dark); }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="API-List" class="bwp-container bwp-flex-container">
+    {% if APIs %}
+    {% for api in APIs %}
+    <div class="API-Box">
+        <a href="{{api.Link}}">
+            <img src="{% static 'icon/' %}{{api.IconPath}}" />
+            <p>{{api.Name}}</p>
+        </a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Keine API verfügbar</p>
+    {% endif %}
+</div>
+{% endblock %}

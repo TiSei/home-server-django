@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'module_3d_libary',
 ]
 
 # Middleware framework
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'DJango_Home_Server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -113,5 +114,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-STATIC_URL = '/static/'
-STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.getenv("DJANGO_STATIC_EXTRA", ""),
+    os.path.join(BASE_DIR, "static"),
+]
+STATICFILES_DIRS = [d for d in STATICFILES_DIRS if d]
+# STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+ {% load static %}
+<html lan="de">
+<head>
+    <title>{{Website.Title}}</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Tim Seifert">
+    <link rel="stylesheet" href="{% static 'bwp_layout.css' %}">
+    <link rel="icon" href="{% static 'icon/' %}{{Website.Favicon}}">
+    <style>
+        h2 > img {
+            vertical-align: middle;
+            margin-right: 0.8em;
+            height: 1.5em;
+        }
+    </style>
+    {% block styles %}
+    {% endblock %}
+</head>
+<script src="{% static 'bwp_general.js' %}"></script>
+<script src="{% static 'bwp_layout.js' %}" defer></script>
+<body>
+    <div class="bwp-onepage-layout-container">
+        <div id="title" class="bwp-container">
+            <h2><img src="{% static 'icon/' %}{{Website.Icon}}" />{{Website.Title}}</h2>
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
