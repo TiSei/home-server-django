@@ -8,7 +8,7 @@ def standard_webpage_attr():
         'Icon':'Home_Server.png',
         }
 
-def page_home(request):
+def index(request):
     api_list = []
     for config in apps.get_app_configs():
         if config.name.startswith('module_'):

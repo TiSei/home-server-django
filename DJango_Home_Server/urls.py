@@ -21,7 +21,7 @@ from django.apps import apps
 from . import views
 
 urlpatterns = [
-    path('',views.page_home),
+    path('',views.index,name='index'),
 ]
 
 for config in apps.get_app_configs():
