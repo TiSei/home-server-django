@@ -22,5 +22,10 @@ from . import views
 
 urlpatterns = [
     path('',views.page_home),
-    path(apps.get_app_config('module_3d_libary').link, include('module_3d_libary.urls')),
 ]
+
+for config in apps.get_app_configs():
+    if config.name.startswith('module_'):
+        urlpatterns.append(
+            path(config.link, include(config.name+'.urls'))
+        )

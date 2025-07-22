@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('',views.page_home),
+    path('menu.json',views.menu_json),
 ]

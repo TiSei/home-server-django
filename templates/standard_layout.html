@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+ {% load static %}
+<html lan="de">
+<head>
+    <title>{{Website.Title}}</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Tim Seifert">
+    <link rel="stylesheet" href="{% static 'bwp_layout.css' %}">
+    {% if Website.Menu %}
+    <link rel="stylesheet" href="{% static 'bwp_menu.css' %}">
+    {% endif %}
+    <link rel="icon" href="{% static 'icon/' %}{{Website.Favicon}}">
+    <style>
+        h1 > img {
+            vertical-align: middle;
+            margin-right: 0.8em;
+            height: 1.8em;
+        }
+        .bwp-footer > p {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+    {% block styles %}
+    {% endblock %}
+</head>
+<script src="{% static 'bwp_general.js' %}"></script>
+<script src="{% static 'bwp_layout.js' %}" defer></script>
+{% if Website.Menu %}
+<script src="{% static 'bwp_menu.js' %}" defer></script>
+{% endif %}
+<body>
+    <div class="bwp-compact-layout-container">
+        <div id="title" class="bwp-core-container bwp-header bwp-headline">
+            <h1><img src="{% static 'icon/' %}{{Website.Icon}}" />{{Website.Title}}</h1>
+            {% if Website.Menu %}
+            <div id="menu" class="bwp-navbar" bwp-menu-data={{Website.Menu|safe}}></div>
+            {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

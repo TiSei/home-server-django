@@ -1,4 +1,4 @@
-{% extends 'onepage_noMenu_layout.html' %}
+{% extends 'standard_layout.html' %}
 {% load static %}
 
 {% block styles %}
@@ -23,6 +23,9 @@
         background-color: var(--default-background-color-light);
         border-radius: 40px;
     }
+    .API-Box:hover {
+        background-color: var(--action-background-color-light);
+    }
     .API-Box > a > img {
         width: 90%;
         max-height: 200px;
@@ -39,6 +42,7 @@
     @media (prefers-color-scheme: dark) {
         .API-Box > a > p { color: var(--default-color-dark); }
         .API-Box { background-color: var(--default-background-color-dark); }
+        .API-Box:hover { background-color: var(--action-background-color-dark); }
     }
 </style>
 {% endblock %}
