@@ -30,23 +30,38 @@ class Tag_Group(DBObject):
     name = models.CharField(max_length=40, unique=True)
     color = models.CharField(max_length=7, validators=[HEX_COLOR_VALIDATOR])
 
+    def __str__(self):
+        return self.name
+
 class Tag(DBObject):
     name = models.CharField(max_length=40, unique=True)
     desc = models.TextField(max_length=200)
     tag_group = models.ForeignKey(Tag_Group, on_delete=models.SET_NULL, null=True, blank=True, related_name='tags')
 
+    def __str__(self):
+        return self.name
+
 class PrintProfil(DBObject):
     name = models.CharField(max_length=40, unique=True)
     desc = models.TextField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
 class Project(DBObject):
     name = models.CharField(max_length=40, unique=True)
     target = models.TextField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 class Parts(DBObject):
     name = models.CharField(max_length=40)
     desc = models.TextField(max_length=200)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='parts')
+
+    def __str__(self):
+        return self.name
 
 class Variants(DBObject):
     name = models.CharField(max_length=40)
@@ -56,3 +71,6 @@ class Variants(DBObject):
     stl_file = models.FileField(upload_to='uploads/stl_file')
     part = models.ForeignKey(Parts, on_delete=models.CASCADE, related_name='Variants')
     printprofil = models.ForeignKey(PrintProfil, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return self.name

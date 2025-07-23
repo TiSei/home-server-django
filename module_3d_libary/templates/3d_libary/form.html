@@ -1,0 +1,76 @@
+{% extends 'standard_layout.html' %}
+
+{% block styles %}
+<style>
+    .form-rows {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 10px 20px;
+        align-items: start; 
+        max-width: 600px;
+        margin-bottom: 20px;
+    }
+
+    .form-rows p {
+        display: contents;
+    }
+
+    .form-rows label {
+        padding-top: 4px;
+        text-align: right;
+    }
+
+    .form-rows input,
+    .form-rows textarea,
+    .form-rows select {
+        width: 100%;
+    }
+
+    .form-rows textarea {
+        max-height: 100px;
+    }
+
+    .form-rows input {
+        min-height: 22px;
+    }
+
+    .form-rows select {
+        min-height: 28px;
+    }
+
+    form .bwp-btn {
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<script type="text/javascript">
+    function clickDelete(button) {
+        if (confirm('Wirklich entfernen?')) {
+            button.form._method.value = "DELETE";
+            button.form.submit();
+        }
+    }
+</script>
+
+<form class="bwp-container" method="post" enctype="multipart/form-data" action="{{action}}">
+    {% csrf_token %}
+    <div class="form-rows">
+        {{ form.as_p }}
+    </div>
+    <button class="bwp-btn" type="submit">&#128427;</button>
+    {% if object %}
+    <button class="bwp-btn" type="button" onclick="clickDelete(this)">&#128465;</button>
+    {% else %}
+    <button class="bwp-btn" type="button" disabled>&#128465;</button>
+    {% endif %}
+    <button class="bwp-btn" type="reset">&#8635;</button>
+    <button class="bwp-btn" onclick="history.back()">&larr;</button>
+    <input type="hidden" name="_method" value="POST">
+</form>
+{% endblock %}
