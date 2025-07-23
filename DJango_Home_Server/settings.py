@@ -121,3 +121,7 @@ STATICFILES_DIRS = [
 ]
 STATICFILES_DIRS = [d for d in STATICFILES_DIRS if d]
 # STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+# Media files (uploads)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

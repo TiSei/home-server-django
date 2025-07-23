@@ -18,6 +18,8 @@ Including another URLconf
 
 from django.urls import path, include
 from django.apps import apps
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -29,3 +31,6 @@ for config in apps.get_app_configs():
         urlpatterns.append(
             path(config.link, include(config.name+'.urls'))
         )
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
