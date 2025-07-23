@@ -16,10 +16,13 @@ def standard_weppage_attr(title = None, icon = None, menu = None):
 
 def standard_form_attr(title, form, path):
     return {
-        'Website':standard_weppage_attr(title=title),
-        'form': form,
-        'object':form.instance,
-        'action':path,
+        'Website':standard_weppage_attr(),
+        'form':{
+            'innerBody':form,
+            'object':form.instance,
+            'action':path,
+            'title':title,
+            }
         }
 
 def menu_json(request):
@@ -62,7 +65,7 @@ def handle_action_request(
         form = form_class(instance=instance)
 
     title = f"{title_prefix} bearbeiten" if instance else f"Neuen {title_prefix} speichern"
-    return render(request, '3d_libary/form.html', standard_form_attr(title, form, request.path))
+    return render(request, 'standard_form_layout.html', standard_form_attr(title, form, request.path))
 
 def action_tag(request, pk=None):
     return handle_action_request(

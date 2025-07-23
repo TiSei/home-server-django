@@ -1,6 +1,6 @@
 <!DOCTYPE html>
  {% load static %}
-<html lan="de">
+<html lang="de">
 <head>
     <title>{{Website.Title}}</title>
     <meta charset="UTF-8">
@@ -29,15 +29,27 @@
 <script src="{% static 'bwp_menu.js' %}" defer></script>
 {% endif %}
 <body>
+    {% if Website.Sidebar %}
+    <div class="bwp-sidebar-layout-container">
+    {% else %}
     <div class="bwp-compact-layout-container">
+    {% endif %}
         <div id="title" class="bwp-core-container bwp-header bwp-headline">
             <h1><img src="{% static 'icon/' %}{{Website.Icon}}" />{{Website.Title}}</h1>
             {% if Website.Menu %}
             <div id="menu" class="bwp-navbar" bwp-menu-data={{Website.Menu|safe}}></div>
             {% endif %}
         </div>
-        {% block content %}
-        {% endblock %}
+        {% if Website.Sidebar %}
+        <div class="bwp-sidebar">
+            {% block sidebar %}
+            {% endblock %}
+        </div>
+        {% endif %}
+        <div class="bwp-content">
+            {% block content %}
+            {% endblock %}
+        </div>
     </div>
 </body>
 </html>

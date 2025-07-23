@@ -2,6 +2,15 @@
 
 {% block styles %}
 <style>
+    form.bwp-container {
+        padding-left: 20px;
+    }
+
+    form > h2 {
+        margin-left: 10px;
+        margin-bottom: 20px;
+    }
+
     .form-rows {
         display: grid;
         grid-template-columns: auto 1fr;
@@ -58,13 +67,14 @@
     }
 </script>
 
-<form class="bwp-container" method="post" enctype="multipart/form-data" action="{{action}}">
+<form class="bwp-container" method="post" enctype="multipart/form-data" action="{{form.action}}">
     {% csrf_token %}
+    <h2>{{ form.title }}</h2>
     <div class="form-rows">
-        {{ form.as_p }}
+        {{ form.innerBody.as_p }}
     </div>
     <button class="bwp-btn" type="submit">&#128427;</button>
-    {% if object %}
+    {% if form.object %}
     <button class="bwp-btn" type="button" onclick="clickDelete(this)">&#128465;</button>
     {% else %}
     <button class="bwp-btn" type="button" disabled>&#128465;</button>
