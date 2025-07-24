@@ -8,3 +8,10 @@
     border-radius: 15px;
     text-decoration: none;
 }
+
+.project {
+    max-width: 800px;
+    border: 2px solid;
+    padding: 12px;
+    margin: 6px;
+}

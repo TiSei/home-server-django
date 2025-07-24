@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.urls import reverse
-from .forms import PrintProfilForm, TagForm, TagGroupForm
-from .models import PrintProfil, Tag, Tag_Group
+from .forms import ProjectForm, PrintProfilForm, TagForm, TagGroupForm
+from .models import Project, PrintProfil, Tag, Tag_Group
 
 def standard_weppage_attr(title = None, icon = None, menu = None):
     config = apps.get_app_config(__name__.split('.')[0])
@@ -27,6 +27,7 @@ def standard_form_attr(title, form, path):
 
 def menu_json(request):
     return JsonResponse({
+        'Projekte':reverse('3d_libary:projects'),
         'Tags':reverse('3d_libary:tag_groups_and_tags'),
         'Druckprofile':reverse('3d_libary:print_profils'),
         '&#8962;':reverse('index'),
@@ -48,6 +49,12 @@ def page_print_profils(request):
     return render(request, '3d_libary/print_profils.html', {
         'Website':standard_weppage_attr(),
         'print_profils':PrintProfil.objects.all(),
+        })
+
+def page_projects(request):
+    return render(request, '3d_libary/projects.html', {
+        'Website':standard_weppage_attr(),
+        'projects':Project.objects.all(),
         })
 
 def handle_action_request(
@@ -109,4 +116,15 @@ def action_print_profil(request, pk=None):
         title_prefix='Druckprofil',
         redirect_post=reverse('3d_libary:print_profils'),
         redirect_delete=reverse('3d_libary:print_profils'),
+    )
+
+def action_project(request, pk=None):
+    return handle_action_request(
+        request,
+        model_class=Project,
+        form_class=ProjectForm,
+        pk=pk,
+        title_prefix='Projekt',
+        redirect_post=reverse('3d_libary:projects'),
+        redirect_delete=reverse('3d_libary:projects'),
     )

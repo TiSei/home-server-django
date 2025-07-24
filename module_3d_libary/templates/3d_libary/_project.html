@@ -1,0 +1,11 @@
+<div class="project">
+    <h3>
+        {{project.name}}
+        <a class="action bwp-btn" href="{% url '3d_libary:project_action' project.pk %}">&#x270E;</a>
+    </h3>
+    <p>{{project.target}}</p>
+    <details>
+        <summary>Projektteile</summary>
+        <p style="color: red">nicht implementiert</p>
+    </details>
+</div>

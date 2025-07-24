@@ -18,4 +18,8 @@ urlpatterns = [
     path('print_profils/',views.page_print_profils,name='print_profils'),
     path('print_profils/action/',views.action_print_profil,name='print_profil_new'),
     path('print_profils/action/<int:pk>',views.action_print_profil,name='print_profil_action'),
+    # projects
+    path('projects/',views.page_projects,name='projects'),
+    path('projects/action/',views.action_project,name='project_new'),
+    path('projects/action/<int:pk>',views.action_project,name='project_action'),
 ]
