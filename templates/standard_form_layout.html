@@ -1,62 +1,5 @@
 {% extends 'standard_layout.html' %}
 
-{% block styles %}
-<style>
-    form.bwp-container {
-        padding-left: 20px;
-    }
-
-    form > h2 {
-        margin-left: 10px;
-        margin-bottom: 20px;
-    }
-
-    .form-rows {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 10px 20px;
-        align-items: start; 
-        max-width: 600px;
-        margin-bottom: 20px;
-    }
-
-    .form-rows p {
-        display: contents;
-    }
-
-    .form-rows label {
-        padding-top: 4px;
-        text-align: right;
-    }
-
-    .form-rows input,
-    .form-rows textarea,
-    .form-rows select {
-        width: 100%;
-    }
-
-    .form-rows textarea {
-        max-height: 100px;
-    }
-
-    .form-rows input {
-        min-height: 22px;
-    }
-
-    .form-rows select {
-        min-height: 28px;
-    }
-
-    form .bwp-btn {
-        width: 30px;
-        height: 30px;
-        vertical-align: middle;
-        font-weight: 600;
-    }
-</style>
-{% endblock %}
-
-
 {% block content %}
 <script type="text/javascript">
     function clickDelete(button) {
@@ -67,7 +10,7 @@
     }
 </script>
 
-<form class="bwp-container" method="post" enctype="multipart/form-data" action="{{form.action}}">
+<form class="bwp-container form-action" method="post" enctype="multipart/form-data" action="{{form.action}}">
     {% csrf_token %}
     <h2>{{ form.title }}</h2>
     <div class="form-rows">

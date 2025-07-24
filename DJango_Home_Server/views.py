@@ -17,7 +17,7 @@ def index(request):
                 'Link':config.link,
                 'IconPath':config.icon,
             })
-    return render(request, 'home.html', {
+    return render(request, 'index.html', {
         'Website':standard_webpage_attr,
         'APIs': api_list,
         })

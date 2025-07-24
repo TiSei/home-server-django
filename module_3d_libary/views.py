@@ -32,7 +32,7 @@ def menu_json(request):
         }, safe=True)
 
 def index(request):
-    return render(request, '3d_libary/home.html', {
+    return render(request, '3d_libary/index.html', {
         'Website':standard_weppage_attr(),
         })
 

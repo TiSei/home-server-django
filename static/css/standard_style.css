@@ -1,0 +1,65 @@
+.bwp-headline > h1 > img {
+    vertical-align: middle;
+    margin-right: 0.8em;
+    height: 1.8em;
+}
+
+#menu {
+    margin-right: 10px;
+}
+
+.form-action {
+    padding-left: 20px;
+}
+
+.form-action > h2 {
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.bwp-btn {
+    min-width: 30px;
+    min-height: 30px;
+    vertical-align: middle;
+    font-weight: 600;
+}
+
+.form-rows {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 20px;
+    align-items: start;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.form-rows p {
+    display: contents;
+}
+
+.form-rows label {
+    padding-top: 4px;
+    text-align: right;
+}
+
+.form-rows input,
+.form-rows textarea,
+.form-rows select {
+    width: 100%;
+}
+
+.form-rows textarea {
+    max-height: 100px;
+}
+
+.form-rows input {
+    min-height: 22px;
+}
+
+.form-rows select {
+    min-height: 28px;
+}
+
+.bwp-btn, .bwp-search-bar, input, textarea, select {
+    font-size: 16px;
+}
