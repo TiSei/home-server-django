@@ -59,6 +59,7 @@ class Parts(DBObject):
     name = models.CharField(max_length=40)
     desc = models.TextField(max_length=200)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='parts')
+    tags = models.ManyToManyField(Tag, related_name='parts')
 
     def __str__(self):
         return self.name
