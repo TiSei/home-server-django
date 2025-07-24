@@ -37,7 +37,11 @@ def index(request):
         })
 
 def page_tag_groups_and_tags(request):
-    return None
+    return render(request, '3d_libary/tag_groups_and_tags.html', {
+        'Website':standard_weppage_attr(),
+        'tags':Tag.objects.all(),
+        'tag_groups':Tag_Group.objects.all(),
+        })
 
 def handle_action_request(
     request,
