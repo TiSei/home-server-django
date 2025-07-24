@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.urls import reverse
 from .forms import ProjectForm, PrintProfilForm, TagForm, TagGroupForm
-from .models import Project, PrintProfil, Tag, Tag_Group
+from .models import Project, Print_Profil, Tag, Tag_Group
 
 def standard_weppage_attr(title = None, icon = None, menu = None):
     config = apps.get_app_config(__name__.split('.')[0])
@@ -48,7 +48,7 @@ def page_tag_groups_and_tags(request):
 def page_print_profils(request):
     return render(request, '3d_libary/print_profils.html', {
         'Website':standard_weppage_attr(),
-        'print_profils':PrintProfil.objects.all(),
+        'print_profils':Print_Profil.objects.all(),
         })
 
 def page_projects(request):
@@ -110,7 +110,7 @@ def action_tag_group(request, pk=None):
 def action_print_profil(request, pk=None):
     return handle_action_request(
         request,
-        model_class=PrintProfil,
+        model_class=Print_Profil,
         form_class=PrintProfilForm,
         pk=pk,
         title_prefix='Druckprofil',

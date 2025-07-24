@@ -41,7 +41,7 @@ class Tag(DBObject):
     def __str__(self):
         return self.name
 
-class PrintProfil(DBObject):
+class Print_Profil(DBObject):
     name = models.CharField(max_length=40, unique=True)
     desc = models.TextField(max_length=200)
 
@@ -55,7 +55,7 @@ class Project(DBObject):
     def __str__(self):
         return self.name
 
-class Parts(DBObject):
+class Part(DBObject):
     name = models.CharField(max_length=40)
     desc = models.TextField(max_length=200)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='parts')
@@ -64,14 +64,14 @@ class Parts(DBObject):
     def __str__(self):
         return self.name
 
-class Variants(DBObject):
+class Variant(DBObject):
     name = models.CharField(max_length=40)
     version = models.CharField(max_length=4, validators=[VERSION_VALIDATOR])
     image = models.ImageField(upload_to='uploads/img', blank=True, null=True)
     fc_file = models.FileField(upload_to='uploads/fc_file', blank=True, null=True)
     stl_file = models.FileField(upload_to='uploads/stl_file')
-    part = models.ForeignKey(Parts, on_delete=models.CASCADE, related_name='Variants')
-    printprofil = models.ForeignKey(PrintProfil, on_delete=models.SET_NULL, blank=True, null=True)
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, related_name='Variants')
+    printprofil = models.ForeignKey(Print_Profil, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return self.name
