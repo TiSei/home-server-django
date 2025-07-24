@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tag, Tag_Group
+from .models import Tag, Tag_Group, PrintProfil
 
 class TagForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,9 @@ class TagGroupForm(forms.ModelForm):
         model = Tag_Group
         fields = ['name', 'color']
         labels = {'name':'Name', 'color':'Farbe'}
+
+class PrintProfilForm(forms.ModelForm):
+    class Meta:
+        model = PrintProfil
+        fields = ['name', 'desc']
+        labels = {'name':'Name', 'desc':'Beschreibung'}

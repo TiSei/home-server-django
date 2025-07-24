@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.urls import reverse
-from .forms import TagForm, TagGroupForm
-from .models import Tag, Tag_Group
+from .forms import PrintProfilForm, TagForm, TagGroupForm
+from .models import PrintProfil, Tag, Tag_Group
 
 def standard_weppage_attr(title = None, icon = None, menu = None):
     config = apps.get_app_config(__name__.split('.')[0])
@@ -28,6 +28,7 @@ def standard_form_attr(title, form, path):
 def menu_json(request):
     return JsonResponse({
         'Tags':reverse('3d_libary:tag_groups_and_tags'),
+        'Druckprofile':reverse('3d_libary:print_profils'),
         '&#8962;':reverse('index'),
         }, safe=True)
 
@@ -41,6 +42,12 @@ def page_tag_groups_and_tags(request):
         'Website':standard_weppage_attr(),
         'tags':Tag.objects.all(),
         'tag_groups':Tag_Group.objects.all(),
+        })
+
+def page_print_profils(request):
+    return render(request, '3d_libary/print_profils.html', {
+        'Website':standard_weppage_attr(),
+        'print_profils':PrintProfil.objects.all(),
         })
 
 def handle_action_request(
@@ -91,4 +98,15 @@ def action_tag_group(request, pk=None):
         title_prefix='Tag-Gruppe',
         redirect_post=reverse('3d_libary:tag_groups_and_tags'),
         redirect_delete=reverse('3d_libary:tag_groups_and_tags'),
+    )
+
+def action_print_profil(request, pk=None):
+    return handle_action_request(
+        request,
+        model_class=PrintProfil,
+        form_class=PrintProfilForm,
+        pk=pk,
+        title_prefix='Druckprofil',
+        redirect_post=reverse('3d_libary:print_profils'),
+        redirect_delete=reverse('3d_libary:print_profils'),
     )
