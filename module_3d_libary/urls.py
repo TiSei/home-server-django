@@ -22,4 +22,8 @@ urlpatterns = [
     path('projects/',views.page_projects,name='projects'),
     path('projects/action/',views.action_project,name='project_new'),
     path('projects/action/<int:pk>',views.action_project,name='project_action'),
+    # parts
+    path('parts/',views.page_parts,name='parts'),
+    path('parts/action/',views.action_part,name='part_new'),
+    path('parts/action/<int:pk>',views.action_part,name='part_action'),
 ]

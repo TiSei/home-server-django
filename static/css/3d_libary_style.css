@@ -15,3 +15,18 @@
     padding: 12px;
     margin: 6px;
 }
+
+.part {
+    max-width: 800px;
+    border: 2px solid;
+    padding: 12px;
+    margin: 6px;
+}
+
+.part > p {
+    margin-bottom: 0px;
+}
+
+.part-project {
+    text-decoration: underline;
+}

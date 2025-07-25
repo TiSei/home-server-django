@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.urls import reverse
-from .forms import ProjectForm, PrintProfilForm, TagForm, TagGroupForm
-from .models import Project, Print_Profil, Tag, Tag_Group
+from .forms import PartForm, ProjectForm, PrintProfilForm, TagForm, TagGroupForm
+from .models import Part, Project, Print_Profil, Tag, Tag_Group
 
 def standard_weppage_attr(title = None, icon = None, menu = None):
     config = apps.get_app_config(__name__.split('.')[0])
@@ -27,6 +27,7 @@ def standard_form_attr(title, form, path):
 def menu_json(request):
     return JsonResponse({
         'Projekte':reverse('3d_libary:projects'),
+        'Projektteile':reverse('3d_libary:parts'),
         'Tags':reverse('3d_libary:tag_groups_and_tags'),
         'Druckprofile':reverse('3d_libary:print_profils'),
         '&#8962;':reverse('index'),
@@ -54,6 +55,12 @@ def page_projects(request):
     return render(request, '3d_libary/projects.html', {
         'Website':standard_weppage_attr(),
         'projects':Project.objects.all(),
+        })
+
+def page_parts(request):
+    return render(request, '3d_libary/parts.html', {
+        'Website':standard_weppage_attr(),
+        'parts':Part.objects.all().order_by('project'),
         })
 
 def handle_action_request(
@@ -126,4 +133,15 @@ def action_project(request, pk=None):
         title_prefix='Projekt',
         redirect_post=reverse('3d_libary:projects'),
         redirect_delete=reverse('3d_libary:projects'),
+    )
+
+def action_part(request, pk=None):
+    return handle_action_request(
+        request,
+        model_class=Part,
+        form_class=PartForm,
+        pk=pk,
+        title_prefix='Projektteile',
+        redirect_post=reverse('3d_libary:parts'),
+        redirect_delete=reverse('3d_libary:parts'),
     )

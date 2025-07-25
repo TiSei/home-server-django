@@ -6,6 +6,8 @@
     <p>{{project.target}}</p>
     <details>
         <summary>Projektteile</summary>
-        <p style="color: red">nicht implementiert</p>
+        {% for part_i in project.parts.all %}
+        {% include '3d_libary/_part.html' with part=part_i %}
+        {% endfor %}
     </details>
 </div>
