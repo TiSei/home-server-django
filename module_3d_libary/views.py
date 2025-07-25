@@ -19,7 +19,6 @@ def standard_form_attr(title, form, path):
         'Website':standard_weppage_attr(),
         'form':{
             'innerBody':form,
-            'object':form.instance,
             'action':path,
             'title':title,
             }

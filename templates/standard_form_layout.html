@@ -17,7 +17,7 @@
         {{ form.innerBody.as_p }}
     </div>
     <button class="bwp-btn" type="submit">&#128427;</button>
-    {% if form.object %}
+    {% if form.innerBody.instance.pk %}
     <button class="bwp-btn" type="button" onclick="clickDelete(this)">&#128465;</button>
     {% else %}
     <button class="bwp-btn" type="button" disabled>&#128465;</button>
