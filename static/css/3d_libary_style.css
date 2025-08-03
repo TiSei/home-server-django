@@ -9,24 +9,40 @@
     text-decoration: none;
 }
 
-.project {
+.project, .part, .print-profil {
     max-width: 800px;
-    border: 2px solid;
+    background-color: var(--default-background-color);
+    border-radius: 10px;
     padding: 12px;
     margin: 6px;
-}
-
-.part {
-    max-width: 800px;
-    border: 2px solid;
-    padding: 12px;
-    margin: 6px;
-}
-
-.part > p {
-    margin-bottom: 0px;
 }
 
 .part-project {
     text-decoration: underline;
+}
+
+h2 > a.bwp-btn, h3 > a.bwp-btn {
+    margin-left: 15px;
+}
+
+.project > p, .part > p {
+    margin: 8px;
+}
+
+.part > h3 {
+    margin-left: 8px;
+}
+
+.bwp-container > h2 {
+    margin-bottom: 8px;
+}
+
+.bwp-flex-container.two-col-container > div,
+.bwp-flex-container.two-col-container > a {
+    width: calc(50% - 38px);
+}
+
+.bwp-flex-container > a {
+    text-decoration: none;
+    color: inherit;
 }

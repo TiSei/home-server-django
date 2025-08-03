@@ -20,11 +20,11 @@
         min-width: 150px;
         max-width: 250px;
         aspect-ratio: 1 / 1;
-        background-color: var(--default-background-color-light);
+        background-color: var(--default-background-color);
         border-radius: 40px;
     }
     .API-Box:hover {
-        background-color: var(--action-background-color-light);
+        background-color: var(--action-background-color);
     }
     .API-Box > a > img {
         width: 90%;
@@ -37,12 +37,7 @@
         margin: 2px 0px;
         font-size: 1.35rem;
         font-weight: 600;
-        color: var(--default-color-light);
-    }
-    @media (prefers-color-scheme: dark) {
-        .API-Box > a > p { color: var(--default-color-dark); }
-        .API-Box { background-color: var(--default-background-color-dark); }
-        .API-Box:hover { background-color: var(--action-background-color-dark); }
+        color: var(--default-color);
     }
 </style>
 {% endblock %}

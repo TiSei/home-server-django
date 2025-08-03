@@ -4,42 +4,18 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
-<style>
-    h2 {
-        margin-bottom: 8px;
-    }
-
-    h2 > .new {
-        margin-left: 15px;
-    }
-
-    #print-profil-box > a {
-        text-decoration: none;
-        color: inherit;
-    }
-    .profil-box {
-        padding: 10px;
-        padding-left: 30px;
-        border: 2px solid;
-        max-width: 600px;
-        margin: 5px;
-    }
-    .profil-box > p {
-        margin-bottom: 4px;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
 <div id="print-profil-box" class="bwp-container">
     <h2>Druckprofile<a class="new bwp-btn" href="{% url '3d_libary:print_profil_new' %}">+</a></h2>
-    {% for profil_i in print_profils %}
-    <a href="{% url '3d_libary:print_profil_action' profil_i.pk %}" class="print-profil">
-        <div class="profil-box">
+    <div class="bwp-flex-container two-col-container">
+        {% for profil_i in print_profils %}
+        <a href="{% url '3d_libary:print_profil_action' profil_i.pk %}" class="print-profil">
             <h3>{{profil_i.name}}</h3>
             <p>{{profil_i.desc}}</p>
-        </div>
-    </a>
-    {% endfor %}
+        </a>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

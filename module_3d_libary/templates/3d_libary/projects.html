@@ -5,12 +5,9 @@
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
 <style>
-    h2 {
-        margin-bottom: 8px;
-    }
-
-    h2 > .new {
-        margin-left: 15px;
+    div.part {
+        padding: 4px;
+        background-color: var(--default-background-color-container);
     }
 </style>
 {% endblock %}
@@ -18,8 +15,10 @@
 {% block content %}
 <div id="project-box" class="bwp-container">
     <h2>Projekte<a class="new bwp-btn" href="{% url '3d_libary:project_new' %}">+</a></h2>
-    {% for project_i in projects %}
-    {% include '3d_libary/_project.html' with project=project_i %}
-    {% endfor %}
+    <div class="bwp-flex-container two-col-container">
+        {% for project_i in projects %}
+        {% include '3d_libary/_project.html' with project=project_i %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
