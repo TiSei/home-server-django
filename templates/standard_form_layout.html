@@ -14,7 +14,33 @@
     {% csrf_token %}
     <h2>{{ form.title }}</h2>
     <div class="form-rows">
-        {{ form.innerBody.as_p }}
+        {% if form.innerBody.non_field_errors %}
+        <ul class="errorlist" style="grid-column: 1 / -1;">
+            {% for error in form.innerBody.non_field_errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% for field in form.innerBody.visible_fields %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% if field.field.widget.input_type == 'file' %}
+        <div class="file-input-box">
+            <input type="file" name="{{ field.name }}" id="{{ field.id_for_label }}">
+            {% if field.value %}
+            Aktuell:<a href="{{ field.value.url }}">{{ field.value.name }}</a>
+            {% endif %}
+        </div>
+        {% else %}
+        {{ field }}
+        {% endif %}
+        {% if field.errors %}
+        <ul class="errorlist">
+            {% for error in field.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endfor %}
     </div>
     <button class="bwp-btn" type="submit">&#128427;</button>
     {% if form.innerBody.instance.pk %}
