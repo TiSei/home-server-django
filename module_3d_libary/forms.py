@@ -1,5 +1,5 @@
 from django import forms
-from .models import Part, Project, Tag, Tag_Group, Print_Profil
+from .models import Variant, Part, Project, Tag, Tag_Group, Print_Profil
 
 class TagForm(forms.ModelForm):
     class Meta:
@@ -30,3 +30,17 @@ class PartForm(forms.ModelForm):
         model = Part
         fields = ['name', 'desc', 'project', 'tags']
         labels = {'name':'Name', 'desc':'Beschreibung', 'project':'Projekt', 'tags':'Tags'}
+
+class VariantForm(forms.ModelForm):
+    class Meta:
+        model = Variant
+        fields = ['name', 'version', 'image', 'fc_file', 'stl_file', 'part', 'printprofil']
+        labels = {
+            'name':'Name',
+            'version':'Version',
+            'image':'Bild',
+            'fc_file':'FreeCad-Datei',
+            'stl_file':'STL-Datei',
+            'part':'Projekt',
+            'printprofil':'Druckprofil'
+            }

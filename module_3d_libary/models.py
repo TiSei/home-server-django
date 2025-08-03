@@ -8,7 +8,7 @@ HEX_COLOR_VALIDATOR = RegexValidator(
 )
 
 VERSION_VALIDATOR = RegexValidator(
-    regex=r'^([0-9]{1}.[0-9]{2}$',
+    regex=r'^\d+\.\d{1,2}$',
     message='Version muss eine valide Versionsbezeichnung sein, z.B. 1.1',
 )
 
@@ -62,7 +62,7 @@ class Part(DBObject):
     tags = models.ManyToManyField(Tag, related_name='parts')
 
     def __str__(self):
-        return self.name
+        return self.project.name+': '+self.name
 
 class Variant(DBObject):
     name = models.CharField(max_length=40)

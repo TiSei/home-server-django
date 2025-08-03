@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.apps import apps
 from django.urls import reverse
-from .forms import PartForm, ProjectForm, PrintProfilForm, TagForm, TagGroupForm
-from .models import Part, Project, Print_Profil, Tag, Tag_Group
+from .forms import VariantForm, PartForm, ProjectForm, PrintProfilForm, TagForm, TagGroupForm
+from .models import Variant, Part, Project, Print_Profil, Tag, Tag_Group
 
 def standard_weppage_attr(title = None, icon = None, menu = None):
     config = apps.get_app_config(__name__.split('.')[0])
@@ -28,6 +28,7 @@ def menu_json(request):
     return JsonResponse({
         'Projekte':reverse('3d_libary:projects'),
         'Projektteile':reverse('3d_libary:parts'),
+        'Bauteile':reverse('3d_libary:variants'),
         'Tags':reverse('3d_libary:tag_groups_and_tags'),
         'Druckprofile':reverse('3d_libary:print_profils'),
         '&#8962;':reverse('index'),
@@ -63,6 +64,12 @@ def page_parts(request):
         'parts':Part.objects.all().order_by('project'),
         })
 
+def page_variants(request):
+    return render(request, '3d_libary/variants.html', {
+        'Website':standard_weppage_attr(),
+        'variants':Variant.objects.all().order_by('part'),
+        })
+
 def handle_action_request(
     request,
     model_class,
@@ -77,7 +84,7 @@ def handle_action_request(
     if request.method == 'POST':
         method = request.POST.get('_method', '').upper()
         if method == 'POST':
-            form = form_class(request.POST, instance=instance)
+            form = form_class(request.POST, request.FILES, instance=instance)
             if form.is_valid():
                 form.save()
                 return redirect(redirect_post)
@@ -141,7 +148,18 @@ def action_part(request, pk=None):
         model_class=Part,
         form_class=PartForm,
         pk=pk,
-        title_prefix='Projektteile',
+        title_prefix='Projektteil',
         redirect_post=reverse('3d_libary:parts'),
         redirect_delete=reverse('3d_libary:parts'),
+    )
+
+def action_variant(request, pk=None):
+    return handle_action_request(
+        request,
+        model_class=Variant,
+        form_class=VariantForm,
+        pk=pk,
+        title_prefix='Bauteil',
+        redirect_post=reverse('3d_libary:variants'),
+        redirect_delete=reverse('3d_libary:variants'),
     )

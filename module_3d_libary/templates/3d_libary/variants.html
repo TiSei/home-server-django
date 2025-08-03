@@ -1,0 +1,18 @@
+{% extends 'standard_layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="variant-box" class="bwp-container">
+    <h2>Bauteile<a class="new bwp-btn" href="{% url '3d_libary:variant_new' %}">+</a></h2>
+    <div class="bwp-flex-container two-col-container">
+        {% for variant_i in variants %}
+        {% include '3d_libary/_variant.html' with variant=variant_i %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

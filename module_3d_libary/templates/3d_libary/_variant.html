@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="variant">
+    <img src="{{variant.image.url}}" />
+    <div class="variant-content">
+        <h3>
+            {{variant.name}}
+            <a class="action bwp-btn" href="{% url '3d_libary:variant_action' variant.pk %}">&#x270E;</a>
+        </h3>
+        <p>Version: {{variant.version}}</p>
+        <p>Druckprofil: {{variant.printprofil}}</p>
+        <div class="downloads">
+            <a href="{{variant.fc_file.url}}"><img src="{% static 'icon/FCStd_Download_icon.png' %}" /></a>
+            <a href="{{variant.stl_file.url}}"><img src="{% static 'icon/STL_Download_icon.png' %}" /></a>
+        </div>
+    </div>
+</div>

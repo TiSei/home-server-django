@@ -26,4 +26,8 @@ urlpatterns = [
     path('parts/',views.page_parts,name='parts'),
     path('parts/action/',views.action_part,name='part_new'),
     path('parts/action/<int:pk>',views.action_part,name='part_action'),
+    # variants
+    path('variants/',views.page_variants,name='variants'),
+    path('variants/action/',views.action_variant,name='variant_new'),
+    path('variants/action/<int:pk>',views.action_variant,name='variant_action'),
 ]
