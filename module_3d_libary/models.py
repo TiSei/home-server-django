@@ -55,6 +55,12 @@ class Project(DBObject):
     def __str__(self):
         return self.name
 
+    def get_all_tags(self):
+        tag_set = set()
+        for part in self.parts.all():
+            tag_set.update(part.tags.all())
+        return sorted(tag_set, key=lambda tag: tag.name)
+
 class Part(DBObject):
     name = models.CharField(max_length=40)
     desc = models.TextField(max_length=200)
@@ -63,6 +69,12 @@ class Part(DBObject):
 
     def __str__(self):
         return self.project.name+': '+self.name
+
+    def get_img_url(self):
+        last_modified_variant = self.Variants.all().order_by('last_modified').first()
+        if last_modified_variant:
+            return last_modified_variant.image.url
+        return None
 
 class Variant(DBObject):
     name = models.CharField(max_length=40)

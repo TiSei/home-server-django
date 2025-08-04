@@ -1,8 +1,8 @@
 {% load static %}
 
-<div class="variant">
+<div class="variant image-container">
     <img src="{{variant.image.url}}" />
-    <div class="variant-content">
+    <div class="text-content">
         <h3>
             {{variant.name}}
             <a class="action bwp-btn" href="{% url '3d_libary:variant_action' variant.pk %}">&#x270E;</a>

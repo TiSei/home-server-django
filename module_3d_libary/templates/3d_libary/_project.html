@@ -4,10 +4,16 @@
         <a class="action bwp-btn" href="{% url '3d_libary:project_action' project.pk %}">&#x270E;</a>
     </h3>
     <p>{{project.target}}</p>
-    <details>
-        <summary>Projektteile</summary>
-        {% for part_i in project.parts.all %}
-        {% include '3d_libary/_part.html' with part=part_i %}
-        {% endfor %}
-    </details>
+    <p>Projektteile ({{project.parts.all.count}})</p>
+    <div class="bwp-flex-container tag-box">
+        {% with project.get_all_tags as tags %}
+        {% if tags %}
+            {% for tag_i in tags %}
+            {% include '3d_libary/_tag.html' with tag=tag_i %}
+            {% endfor %}
+        {% else %}
+        <p>Keine Tags vorhanden.</p>
+        {% endif %}
+        {% endwith %}
+    </div>
 </div>

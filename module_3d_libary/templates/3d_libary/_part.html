@@ -1,15 +1,22 @@
-<div class="part">
-    <h3>
-        {% if showProject %}
-        <span class="part-project">{{part.project}}:</span>
-        {% endif %}
-        <span class="part-name">{{part.name}}</span>
-        <a class="action bwp-btn" href="{% url '3d_libary:part_action' part.pk %}">&#x270E;</a>
-    </h3>
-    <p>{{part.desc}}</p>
-    <div class="bwp-flex-container">
-        {% for tag_i in part.tags.all %}
-        {% include '3d_libary/_tag.html' with tag=tag_i %}
-        {% endfor %}
+<div class="part image-container">
+    {% with part.get_img_url as img_url %}
+    {% if img_url %}
+        <img src="{{part.get_img_url}}" />
+    {% endif %}
+    {% endwith %}
+    <div class="text-content"
+        <h3>
+            {% if showProject %}
+            <span class="part-project">{{part.project}}:</span>
+            {% endif %}
+            <span class="part-name">{{part.name}}</span>
+            <a class="action bwp-btn" href="{% url '3d_libary:part_action' part.pk %}">&#x270E;</a>
+        </h3>
+        <p>{{part.desc}}</p>
+        <div class="bwp-flex-container">
+            {% for tag_i in part.tags.all %}
+            {% include '3d_libary/_tag.html' with tag=tag_i %}
+            {% endfor %}
+        </div>
     </div>
 </div>
