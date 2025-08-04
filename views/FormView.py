@@ -11,7 +11,7 @@ class StandardFormView(View, WebPageAttributeContext):
 
     def get_form_attr(self, title, form, path):
         return {
-            **self.get_webpage_attr(),
+            'Website': self.get_webpage_attr(),
             'form': {
                 'innerBody': form,
                 'action': path,
