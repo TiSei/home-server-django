@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404
 
 def get_standard_webpage_attr():
     return {
@@ -13,7 +14,13 @@ class WebPageAttributeContext:
     def get_webpage_attr(self):
         return self.webpage_attr
 
-class StandardTemplateView(TemplateView, WebPageAttributeContext):
+class AccessData:
+    def get_instance(self, model, pk):
+        return None if not pk else get_object_or_404(model, pk=pk)
+    def get_all(self, model):
+        return model.objects.all()
+
+class StandardTemplateView(TemplateView, WebPageAttributeContext, AccessData):
     template_name = ''
     data_context = {}
 

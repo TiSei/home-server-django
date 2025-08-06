@@ -31,35 +31,30 @@ class TemplateView_3d_libary(StandardTemplateView):
 class TagAndTagGroupTemplateView(TemplateView_3d_libary):
     template_name='3d_libary/tag_groups_and_tags.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.all()
-        context['tag_groups'] = Tag_Group.objects.all()
-        return context
+        self.data_context['tags'] = self.get_all(Tag)
+        self.data_context['tag_groups'] = self.get_all(Tag_Group)
+        return super().get_context_data(**kwargs)
 
 class PrintProfilTemplateView(TemplateView_3d_libary):
     template_name='3d_libary/print_profils.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['print_profils'] = Print_Profil.objects.all()
-        return context
+        self.data_context['print_profils'] = self.get_all(Print_Profil)
+        return super().get_context_data(**kwargs)
 
 class ProjectTemplateView(TemplateView_3d_libary):
     template_name='3d_libary/projects.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['projects'] = Project.objects.all()
-        return context
+        self.data_context['projects'] = self.get_all(Project)
+        return super().get_context_data(**kwargs)
 
 class PartTemplateView(TemplateView_3d_libary):
     template_name='3d_libary/parts.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['parts'] = Part.objects.all()
-        return context
+        self.data_context['parts'] = self.get_all(Part)
+        return super().get_context_data(**kwargs)
 
 class VariantTemplateView(TemplateView_3d_libary):
     template_name='3d_libary/variants.html'
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['variants'] = Variant.objects.all()
-        return context
+        self.data_context['variants'] = self.get_all(Variant)
+        return super().get_context_data(**kwargs)

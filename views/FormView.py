@@ -1,8 +1,8 @@
 from django.views import View
-from django.shortcuts import render, redirect, get_object_or_404
-from .TemplateView import WebPageAttributeContext
+from django.shortcuts import render, redirect
+from .TemplateView import AccessData, WebPageAttributeContext
 
-class StandardFormView(View, WebPageAttributeContext):
+class StandardFormView(View, WebPageAttributeContext, AccessData):
     model = None
     form_class = None
     title_prefix = 'Eintrag'
@@ -19,18 +19,15 @@ class StandardFormView(View, WebPageAttributeContext):
             }
         }
 
-    def get_instance(self, pk):
-        return None if not pk else get_object_or_404(self.model, pk=pk)
-
     def get_response(self, request, form, pk):
         title = f"{self.title_prefix} bearbeiten" if pk else f"Neuen {self.title_prefix} speichern"
         return render(request, self.template_name, self.get_form_attr(title, form, request.path))
 
     def get(self, request, pk=None):
-        return self.get_response(request, self.form_class(instance=self.get_instance(pk)), pk)
+        return self.get_response(request, self.form_class(instance=self.get_instance(self.model, pk)), pk)
 
     def post(self, request, pk=None):
-        instance = self.get_instance(pk)
+        instance = self.get_instance(self.model, pk)
         method = request.POST.get('_method', '').upper()
 
         if method == 'DELETE':
