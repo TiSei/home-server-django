@@ -2,9 +2,11 @@
     <h3>
         {{project.name}}
         <a class="action bwp-btn" href="{% url '3d_libary:project_action' project.pk %}">&#x270E;</a>
+        <a class="detail bwp-btn" href="{% url '3d_libary:project_single' project.pk %}">&#x1F441;</a>
     </h3>
     <p>{{project.target}}</p>
     <p>Projektteile ({{project.parts.all.count}})</p>
+    <p>Bauteile ({{project.get_all_variants|length}})</p>
     <div class="bwp-flex-container tag-box">
         {% with project.get_all_tags as tags %}
         {% if tags %}

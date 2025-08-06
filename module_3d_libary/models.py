@@ -61,6 +61,12 @@ class Project(DBObject):
             tag_set.update(part.tags.all())
         return sorted(tag_set, key=lambda tag: tag.name)
 
+    def get_all_variants(self):
+        variant_list = []
+        for part in self.parts.all():
+            variant_list.extend(part.Variants.all())
+        return variant_list
+
 class Part(DBObject):
     name = models.CharField(max_length=40)
     desc = models.TextField(max_length=200)

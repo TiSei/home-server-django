@@ -1,0 +1,47 @@
+{% extends 'standard_layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
+<style>
+    summary {
+        margin: 5px;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="project-detail-box" class="bwp-container">
+    <h3>
+        Projekt: {{project.name}}
+        <a class="action bwp-btn" href="{% url '3d_libary:project_action' project.pk %}">&#x270E;</a>
+    </h3>
+    <p>{{project.target}}</p>
+    <details open>
+        <summary>
+            Projektteile ({{project.parts.count}})
+            <a class="new bwp-btn" href="{% url '3d_libary:part_new' %}">+</a>
+        </summary>
+        <div class="bwp-flex-container two-col-container">
+            {% for part_i in project.parts.all %}
+            {% include '3d_libary/_part.html' with part=part_i %}
+            {% endfor %}
+        </div>
+    </details>
+    {% with project.get_all_variants as variants %}
+    <details open>
+        <summary>
+            Bauteile ({{variants|length}})
+            <a class="new bwp-btn" href="{% url '3d_libary:variant_new' %}">+</a>
+        </summary>
+        <div class="bwp-flex-container two-col-container">
+            {% for variant_i in variants %}
+            {% include '3d_libary/_variant.html' with variant=variant_i %}
+            {% endfor %}
+        </div>
+    </details>
+    {% endwith %}
+</div>
+{% endblock %}

@@ -1,7 +1,9 @@
 {% load static %}
 
 <div class="variant image-container">
+    {% if variant.image %}
     <img src="{{variant.image.url}}" />
+    {% endif %}
     <div class="text-content">
         <h3>
             {{variant.name}}
@@ -10,7 +12,9 @@
         <p>Version: {{variant.version}}</p>
         <p>Druckprofil: {{variant.printprofil}}</p>
         <div class="downloads">
+            {% if variant.fc_file %}
             <a href="{{variant.fc_file.url}}"><img src="{% static 'icon/FCStd_Download_icon.png' %}" /></a>
+            {% endif %}
             <a href="{{variant.stl_file.url}}"><img src="{% static 'icon/STL_Download_icon.png' %}" /></a>
         </div>
     </div>

@@ -58,3 +58,10 @@ class VariantTemplateView(TemplateView_3d_libary):
     def get_context_data(self, **kwargs):
         self.data_context['variants'] = self.get_all(Variant)
         return super().get_context_data(**kwargs)
+
+class SingleProjectTemplateView(TemplateView_3d_libary):
+    template_name='3d_libary/single_project.html'
+    def get_context_data(self, **kwargs):
+        project_id = self.kwargs.get('pk')
+        self.data_context['project'] = self.get_instance(Project, project_id)
+        return super().get_context_data(**kwargs)

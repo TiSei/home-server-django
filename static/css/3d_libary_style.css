@@ -21,7 +21,7 @@
     text-decoration: underline;
 }
 
-h2 > a.bwp-btn, h3 > a.bwp-btn {
+h2 > a.bwp-btn:nth-child(1), h3 > a.bwp-btn:nth-child(1), summary > a.bwp-btn:nth-child(1) {
     margin-left: 15px;
 }
 
