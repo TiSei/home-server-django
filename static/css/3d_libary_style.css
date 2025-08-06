@@ -21,7 +21,7 @@
     text-decoration: underline;
 }
 
-h2 > a.bwp-btn:nth-child(1), h3 > a.bwp-btn:nth-child(1), summary > a.bwp-btn:nth-child(1) {
+a.bwp-btn:nth-child(1) {
     margin-left: 15px;
 }
 
@@ -68,4 +68,9 @@ h2 > a.bwp-btn:nth-child(1), h3 > a.bwp-btn:nth-child(1), summary > a.bwp-btn:nt
 .variant > div > .downloads > a > img {
     height: 4rem;
     width: 4rem;
+}
+
+summary {
+    margin: 5px;
+    font-weight: 600;
 }

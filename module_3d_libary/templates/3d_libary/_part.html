@@ -11,6 +11,7 @@
             {% endif %}
             <span class="part-name">{{part.name}}</span>
             <a class="action bwp-btn" href="{% url '3d_libary:part_action' part.pk %}">&#x270E;</a>
+            <a class="detail bwp-btn" href="{% url '3d_libary:part_single' part.pk %}">&#x1F441;</a>
         </h3>
         <p>{{part.desc}}</p>
         <div class="bwp-flex-container">

@@ -65,3 +65,10 @@ class SingleProjectTemplateView(TemplateView_3d_libary):
         project_id = self.kwargs.get('pk')
         self.data_context['project'] = self.get_instance(Project, project_id)
         return super().get_context_data(**kwargs)
+
+class SinglePartTemplateView(TemplateView_3d_libary):
+    template_name='3d_libary/single_part.html'
+    def get_context_data(self, **kwargs):
+        part_id = self.kwargs.get('pk')
+        self.data_context['part'] = self.get_instance(Part, part_id)
+        return super().get_context_data(**kwargs)

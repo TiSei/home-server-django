@@ -11,6 +11,7 @@ from module_3d_libary.views.template_views import (
     PartTemplateView,
     PrintProfilTemplateView,
     ProjectTemplateView,
+    SinglePartTemplateView,
     SingleProjectTemplateView,
     TagAndTagGroupTemplateView,
     TemplateView_3d_libary,
@@ -45,6 +46,7 @@ urlpatterns = [
     path('parts/',PartTemplateView.as_view(),name='parts'),
     path('parts/action/',PartActionView.as_view(),name='part_new'),
     path('parts/action/<int:pk>',PartActionView.as_view(),name='part_action'),
+    path('parts/<int:pk>',SinglePartTemplateView.as_view(),name="part_single"),
     # variants
     path('variants/',VariantTemplateView.as_view(),name='variants'),
     path('variants/action/',VariantActionView.as_view(),name='variant_new'),
