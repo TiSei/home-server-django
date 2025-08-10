@@ -1,18 +1,18 @@
 <div class="project">
     <h3>
-        {{project.name}}
-        <a class="action bwp-btn" href="{% url '3d_libary:project_action' project.pk %}">&#x270E;</a>
-        <a class="detail bwp-btn" href="{% url '3d_libary:project_single' project.pk %}">&#x1F441;</a>
+        {{item.name}}
+        <a class="action bwp-btn" href="{% url '3d_libary:project_action' item.pk %}">&#x270E;</a>
+        <a class="detail bwp-btn" href="{% url '3d_libary:project_single' item.pk %}">&#x1F441;</a>
     </h3>
-    <p>{{project.target}}</p>
-    <p>Projektteile ({{project.parts.all.count}})</p>
-    <p>Bauteile ({{project.get_all_variants|length}})</p>
+    <p>{{item.target}}</p>
+    <p>Projektteile ({{item.parts.all.count}})</p>
+    <p>Bauteile ({{item.get_all_variants|length}})</p>
     <div class="bwp-flex-container tag-box">
-        {% with project.get_all_tags as tags %}
+        {% with item.get_all_tags as tags %}
         {% if tags %}
-            {% for tag_i in tags %}
-            {% include '3d_libary/_tag.html' with tag=tag_i %}
-            {% endfor %}
+        {% for tag_i in tags %}
+        {% include '3d_libary/_tag.html' with item=tag_i %}
+        {% endfor %}
         {% else %}
         <p>Keine Tags vorhanden.</p>
         {% endif %}

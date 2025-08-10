@@ -5,7 +5,8 @@ from ..forms import TagForm, TagGroupForm, ProjectForm, PartForm, VariantForm, P
 from ..models import Tag, Tag_Group, Project, Part, Variant, Print_Profil
 
 class FormView_3d_libary(StandardFormView):
-    webpage_attr = get_3d_libary_weppage_attr(menu = False)
+    def get_webpage_attr(self):
+        return get_3d_libary_weppage_attr(menu = False)
     
 class TagActionView(FormView_3d_libary):
     model = Tag

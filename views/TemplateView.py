@@ -1,18 +1,13 @@
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404
 
-def get_standard_webpage_attr():
-    return {
+class WebPageAttributeContext:
+    def get_webpage_attr(self):
+        return {
             'Title':'Home Server',
             'Favicon':'Home_Server_Icon.png',
             'Icon':'Home_Server.png',
         }
-
-class WebPageAttributeContext:
-    webpage_attr = get_standard_webpage_attr()
-    
-    def get_webpage_attr(self):
-        return self.webpage_attr
 
 class AccessData:
     def get_instance(self, model, pk):
@@ -21,11 +16,9 @@ class AccessData:
         return model.objects.all()
 
 class StandardTemplateView(TemplateView, WebPageAttributeContext, AccessData):
-    template_name = ''
-    data_context = {}
+    template_name = None
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Website'] = self.get_webpage_attr()
-        context.update({key: qs for key, qs in self.data_context.items()})
         return context

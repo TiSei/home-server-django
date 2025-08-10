@@ -1,24 +1,24 @@
 {% load static %}
 
 <div class="variant image-container">
-    {% if variant.image %}
-    <img src="{{variant.image.url}}" />
+    {% if item.image %}
+    <img src="{{item.image.url}}" />
     {% endif %}
     <div class="text-content">
         <h3>
-            {{variant.name}}
-            <a class="action bwp-btn" href="{% url '3d_libary:variant_action' variant.pk %}">&#x270E;</a>
+            {{item.name}}
+            <a class="action bwp-btn" href="{% url '3d_libary:variant_action' item.pk %}">&#x270E;</a>
         </h3>
-        <p>Version: {{variant.version}}</p>
-        <p>Druckprofil: {{variant.printprofil}}</p>
-        {% if variant.notice %}
-        <p>Notiz: {{variant.notice}}</p>
+        <p>Version: {{item.version}}</p>
+        <p>Druckprofil: {{item.printprofil}}</p>
+        {% if item.notice %}
+        <p>Notiz: {{item.notice}}</p>
         {% endif %}
         <div class="downloads">
-            {% if variant.fc_file %}
-            <a href="{{variant.fc_file.url}}"><img src="{% static 'icon/FCStd_Download_icon.png' %}" /></a>
+            {% if item.fc_file %}
+            <a href="{{item.fc_file.url}}"><img src="{% static 'icon/FCStd_Download_icon.png' %}" /></a>
             {% endif %}
-            <a href="{{variant.stl_file.url}}"><img src="{% static 'icon/STL_Download_icon.png' %}" /></a>
+            <a href="{{item.stl_file.url}}"><img src="{% static 'icon/STL_Download_icon.png' %}" /></a>
         </div>
     </div>
 </div>

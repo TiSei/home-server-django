@@ -20,21 +20,10 @@ from django.urls import path, include
 from django.apps import apps
 from django.conf import settings
 from django.conf.urls.static import static
-from views.TemplateView import StandardTemplateView
+from views.server_views import IndexTemplateView
 
 urlpatterns = [
-    path('',StandardTemplateView.as_view(
-        template_name='index.html',
-        data_context = {'APIs': [
-            {
-                'Name': config.verbose_name,
-                'Link': config.link,
-                'IconPath': config.icon,
-            }
-            for config in apps.get_app_configs()
-            if config.name.startswith('module_')
-        ]},
-    ),name='index'),
+    path('',IndexTemplateView.as_view(),name='index'),
 ]
 
 for config in apps.get_app_configs():

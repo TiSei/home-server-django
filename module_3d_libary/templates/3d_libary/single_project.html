@@ -4,12 +4,6 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
-<style>
-    summary {
-        margin: 5px;
-        font-weight: 600;
-    }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -26,7 +20,7 @@
         </summary>
         <div class="bwp-flex-container two-col-container">
             {% for part_i in project.parts.all %}
-            {% include '3d_libary/_part.html' with part=part_i %}
+            {% include '3d_libary/_part.html' with item=part_i %}
             {% endfor %}
         </div>
     </details>
@@ -38,7 +32,7 @@
         </summary>
         <div class="bwp-flex-container two-col-container">
             {% for variant_i in variants %}
-            {% include '3d_libary/_variant.html' with variant=variant_i %}
+            {% include '3d_libary/_variant.html' with item=variant_i %}
             {% endfor %}
         </div>
     </details>
