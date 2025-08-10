@@ -34,10 +34,11 @@ class PartForm(forms.ModelForm):
 class VariantForm(forms.ModelForm):
     class Meta:
         model = Variant
-        fields = ['name', 'version', 'image', 'fc_file', 'stl_file', 'part', 'printprofil']
+        fields = ['name', 'version', 'notice', 'image', 'fc_file', 'stl_file', 'part', 'printprofil']
         labels = {
             'name':'Name',
             'version':'Version',
+            'notice':'Notiz',
             'image':'Bild',
             'fc_file':'FreeCad-Datei',
             'stl_file':'STL-Datei',

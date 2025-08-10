@@ -23,7 +23,7 @@
         Projekt: {{part.project.name}}
         <a class="detail bwp-btn" href="{% url '3d_libary:project_single' part.project.pk %}">&#x1F441;</a>
     </p>
-    {% with part.Variants.all as variants %}
+    {% with part.variants.all as variants %}
     <details open>
         <summary>
             Bauteile ({{variants|length}})

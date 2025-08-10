@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.core.validators import RegexValidator
+from django.core.validators import RegexValidator, FileExtensionValidator
 
 HEX_COLOR_VALIDATOR = RegexValidator(
     regex=r'^#([A-Fa-f0-9]{6})$',
@@ -39,7 +39,7 @@ class Tag(DBObject):
     tag_group = models.ForeignKey(Tag_Group, on_delete=models.SET_NULL, null=True, blank=True, related_name='tags')
 
     def __str__(self):
-        return self.name
+        return self.tag_group.name + ': ' + self.name
 
 class Print_Profil(DBObject):
     name = models.CharField(max_length=40, unique=True)
@@ -64,7 +64,7 @@ class Project(DBObject):
     def get_all_variants(self):
         variant_list = []
         for part in self.parts.all():
-            variant_list.extend(part.Variants.all())
+            variant_list.extend(part.variants.all())
         return variant_list
 
 class Part(DBObject):
@@ -77,7 +77,7 @@ class Part(DBObject):
         return self.project.name+': '+self.name
 
     def get_img_url(self):
-        last_modified_variant = self.Variants.all().order_by('last_modified').first()
+        last_modified_variant = self.variants.all().order_by('last_modified').first()
         if last_modified_variant:
             return last_modified_variant.image.url
         return None
@@ -85,10 +85,16 @@ class Part(DBObject):
 class Variant(DBObject):
     name = models.CharField(max_length=40)
     version = models.CharField(max_length=4, validators=[VERSION_VALIDATOR])
-    image = models.ImageField(upload_to='uploads/img', blank=True, null=True)
-    fc_file = models.FileField(upload_to='uploads/fc_file', blank=True, null=True)
-    stl_file = models.FileField(upload_to='uploads/stl_file')
-    part = models.ForeignKey(Part, on_delete=models.CASCADE, related_name='Variants')
+    notice = models.CharField(max_length=200, blank=True, null=True)
+    image = models.ImageField(upload_to='3d_libary/uploads/img',
+                              blank=True, null=True,
+                              validators=[FileExtensionValidator(['png','jpg','jpeg'])])
+    fc_file = models.FileField(upload_to='3d_libary/uploads/fc_file',
+                               blank=True, null=True,
+                               validators=[FileExtensionValidator(['FCStd'])])
+    stl_file = models.FileField(upload_to='3d_libary/uploads/stl_file',
+                                validators=[FileExtensionValidator(['stl','3mf'])])
+    part = models.ForeignKey(Part, on_delete=models.CASCADE, related_name='variants')
     printprofil = models.ForeignKey(Print_Profil, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):

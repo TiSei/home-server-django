@@ -11,6 +11,9 @@
         </h3>
         <p>Version: {{variant.version}}</p>
         <p>Druckprofil: {{variant.printprofil}}</p>
+        {% if variant.notice %}
+        <p>Notiz: {{variant.notice}}</p>
+        {% endif %}
         <div class="downloads">
             {% if variant.fc_file %}
             <a href="{{variant.fc_file.url}}"><img src="{% static 'icon/FCStd_Download_icon.png' %}" /></a>
