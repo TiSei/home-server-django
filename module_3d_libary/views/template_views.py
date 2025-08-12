@@ -1,4 +1,3 @@
-from django.db.models import QuerySet, Count, Q, query
 from django.http import JsonResponse
 from django.urls import reverse
 from django.apps import apps
@@ -28,6 +27,7 @@ def menu(request):
         }, safe=True)
 
 class TemplateView_3d_libary(StandardTemplateView):
+    styles = ['/static/css/3d_libary_style.css']
     def get_webpage_attr(self):
         return get_3d_libary_weppage_attr(True)
 

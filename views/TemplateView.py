@@ -17,8 +17,10 @@ class AccessData:
 
 class StandardTemplateView(TemplateView, WebPageAttributeContext, AccessData):
     template_name = None
+    styles = []
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['Website'] = self.get_webpage_attr()
+        context['Website']['Styles'] = self.styles
         return context

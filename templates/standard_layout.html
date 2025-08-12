@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="{% static 'bwp_menu.css' %}">
     {% endif %}
     <link rel="icon" href="{% static 'icon/' %}{{Website.Favicon}}">
-    {% block styles %}
+    {% for style in Website.Styles %}
+    <link rel="stylesheet" href="{{style}}">
+    {% endfor %}
+    {% block head %}
     {% endblock %}
 </head>
 <script src="{% static 'bwp_general.js' %}"></script>

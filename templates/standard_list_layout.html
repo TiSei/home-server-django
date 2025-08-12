@@ -1,11 +1,5 @@
 {% extends 'standard_layout.html' %}
 
-{% load static %}
-
-{% block styles %}
-<link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
-{% endblock %}
-
 {% if lists|length == 1 and lists.0.filter %}
 {% block sidebar %}
 <div class="bwp-container bwp-align-center filter">
