@@ -37,11 +37,6 @@ a.bwp-btn.action, a.bwp-btn.new {
     margin-bottom: 8px;
 }
 
-.bwp-flex-container.two-col-container > div,
-.bwp-flex-container.two-col-container > a {
-    width: calc(50% - 38px);
-}
-
 .bwp-flex-container > a {
     text-decoration: none;
     color: inherit;
@@ -73,4 +68,23 @@ a.bwp-btn.action, a.bwp-btn.new {
 summary {
     margin: 5px;
     font-weight: 600;
+}
+
+.filter select {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 90%;
+    background-color: var(--default-background-color);
+}
+
+.filter select::-webkit-scrollbar {
+    width: 0;
+}
+
+.filter button {
+    margin-top: 10px;
+}
+
+.filter > form > p {
+    margin: 5px;
 }

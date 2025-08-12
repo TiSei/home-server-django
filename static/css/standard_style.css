@@ -63,3 +63,32 @@
 .bwp-btn, .bwp-search-bar, input, textarea, select {
     font-size: 16px;
 }
+
+/* standard list layout */
+.list-container > .bwp-flex-container > a {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    line-height: normal;
+}
+
+.list-container > .bwp-flex-container > a > abbr {
+    display: inline-block;
+}
+
+.bwp-flex-container.two-col-container > div,
+.bwp-flex-container.two-col-container > a {
+    width: calc(50% - 38px);
+}
+
+.pagination {
+    margin: 20px;
+}
+
+.pagination > .backward-page {
+    margin-right: 16px;
+}
+
+.pagination > .forward-page {
+    margin-left: 16px;
+}

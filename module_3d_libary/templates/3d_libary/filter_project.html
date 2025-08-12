@@ -1,0 +1,6 @@
+<p><label for="tags">Tags</label></p>
+<select name="tags" id="tags" multiple>
+    {% for tag_i in filter_values.tags %}
+    <option value="{{tag_i.pk}}" style="color:{{tag_i.tag_group.color}}" {% if tag_i.pk in filter_values.current_tags %}selected{% endif %}>{{tag_i.name}}</option>
+    {% endfor %}
+</select>

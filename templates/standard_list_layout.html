@@ -1,0 +1,55 @@
+{% extends 'standard_layout.html' %}
+
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/3d_libary_style.css' %}">
+{% endblock %}
+
+{% if lists|length == 1 and lists.0.filter %}
+{% block sidebar %}
+<div class="bwp-container bwp-align-center filter">
+    <h3>{{lists.0.filter_values.title}}</h3>
+    <form>
+        {% include lists.0.filter_template with filter_values=lists.0.filter_values %}
+        <button class="bwp-btn" type="submit">Suchen</button>
+        <button class="bwp-btn" type="reset">&#8635;</button>
+    </form>
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+{% for list in lists %}
+<div class="bwp-container list-container">
+    <h2>
+        {{list.title}}
+        <a class="new bwp-btn" href="{% url list.new_url %}">+</a>
+    </h2>
+    <div class="bwp-flex-container {% if list.two_cols %} two-col-container {% endif %}">
+        {% for object_i in list.objects %}
+        {% if list.action_url %}
+        <a href="{% url list.action_url object_i.pk %}">{% include list.object_template with item=object_i %}</a>
+        {% else %}
+        {% include list.object_template with item=object_i %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% if list.objects.number %}
+    <div class="pagination bwp-align-center">
+        {% if list.objects.has_previous %}
+        <a class="bwp-btn backward-page" href="?{{ current_query }}&page={{ list.objects.previous_page_number }}">&larr;</a>
+        {% else %}
+        <button class="bwp-btn backward-page" disabled onclick="L_jumpToTop()">&larr;</button>
+        {% endif %}
+        Seite {{ list.objects.number }} von {{ list.objects.paginator.num_pages }}
+        {% if list.objects.has_next %}
+        <a class="bwp-btn forward-page" href="?{{ current_query }}&page={{ list.objects.next_page_number }}">&rarr;</a>
+        {% else %}
+        <button class="bwp-btn forward-page" disabled onclick="L_jumpToTop()">&rarr;</button>
+        {% endif %}
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}
