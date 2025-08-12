@@ -1,0 +1,35 @@
+{% extends 'standard_layout.html' %}
+
+{% block content %}
+<div class="bwp-container">
+    <h3>
+        {{Single.title}}: {{Single.name}}
+        {% if Single.action_url %}
+        <a class="action bwp-btn" href="{% url Single.action_url Single.object.pk %}">&#x270E;</a>
+        {% endif %}
+    </h3>
+    {% for paragraph in Single.paragraphs %}
+    <p class="{% for class in paragraph.classes %}{{class}} {% endfor %}">
+        {{paragraph.label}}: {{paragraph.content}}
+        {% if paragraph.detail_url %}
+        <a class="detail bwp-btn" href="{% url paragraph.detail_url paragraph.object.pk %}">&#x1F441;</a>
+        {% endif %}
+    </p>
+    {% endfor %}
+    {% for detail in Single.details %}
+    <details {% if detail.default_open %}open{% endif %}>
+        <summary>
+            {{detail.summary}} ({{detail.objects|length}})
+            {% if deatil.new_url %}
+            <a class="new bwp-btn" href="{% url detail.new_url %}">+</a>
+            {% endif %}
+        </summary>
+        <div class="bwp-flex-container {% if detail.two_cols %}two-col-container{% endif %}">
+            {% for object_i in detail.objects %}
+            {% include detail.object_template with item=object_i %}
+            {% endfor %}
+        </div>
+    </details>
+    {% endfor %}
+</div>
+{% endblock %}

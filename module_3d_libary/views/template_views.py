@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.urls import reverse
 from django.apps import apps
+from views.FormView import StandardFormView
 from views.TemplateListView import StandardTemplateListView
+from views.TemplateSingleView import StandardTemplateSingleView
 from views.TemplateView import StandardTemplateView
 from ..models import (Tag, Tag_Group, Print_Profil, Project, Part, Variant)
 
@@ -32,6 +34,9 @@ class TemplateView_3d_libary(StandardTemplateView):
         return get_3d_libary_weppage_attr(True)
 
 class TemplateListView_3d_libary(TemplateView_3d_libary, StandardTemplateListView):
+    pass
+
+class TemplateSingleView_3d_libary(TemplateView_3d_libary, StandardTemplateSingleView):
     pass
 
 class PrintProfilTemplateView(TemplateListView_3d_libary):
@@ -107,18 +112,40 @@ class VariantTemplateView(TemplateListView_3d_libary):
                 '3d_libary/_variant.html',
                 page_size=10)]
 
-class SingleProjectTemplateView(TemplateView_3d_libary):
-    template_name='3d_libary/single_project.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        project_id = self.kwargs.get('pk')
-        context['project'] = self.get_instance(Project, project_id)
-        return context
+class SingleProjectTemplateView(TemplateSingleView_3d_libary):
+    def get_config(self, pk):
+        project = self.get_instance(Project, pk)
+        return StandardTemplateSingleView.build_config(
+            'Projekt',
+            project.name,
+            project,
+            '3d_libary:project_action',
+            [StandardTemplateSingleView.build_paragraph(
+                 'Projektziel',project.target
+                 )],
+            [StandardTemplateSingleView.build_details(
+                 'Projektteile','3d_libary:part_new',project.parts.all(),'3d_libary/_part.html'
+                 ),
+             StandardTemplateSingleView.build_details(
+                 'Bauteile','3d_libary:variant_new',project.get_all_variants(),'3d_libary/_variant.html'
+                 )]
+            )
 
-class SinglePartTemplateView(TemplateView_3d_libary):
-    template_name='3d_libary/single_part.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        part_id = self.kwargs.get('pk')
-        context['part'] = self.get_instance(Part, part_id)
-        return context
+class SinglePartTemplateView(TemplateSingleView_3d_libary):
+    def get_config(self, pk):
+        part = self.get_instance(Part, pk)
+        return StandardTemplateSingleView.build_config(
+            'Teilprojekt',
+            part.name,
+            part,
+            '3d_libary:part_action',
+            [StandardTemplateSingleView.build_paragraph(
+                 'Beschreibung',part.desc
+                 ),
+             StandardTemplateSingleView.build_paragraph(
+                 'Projekt',part.project.name,instance=part.project,detail_url='3d_libary:project_single'
+                 )],
+            [StandardTemplateSingleView.build_details(
+                 'Bauteile','3d_libary:variant_new',part.variants.all(),'3d_libary/_variant.html'
+                 )]
+            )
