@@ -3,7 +3,6 @@ db.sqlite3
 *.pyproj
 *.pyproj.user
 *.sln
-requirements.txt
 *__pycache__*
 media/*
 .env

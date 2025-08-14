@@ -5,10 +5,10 @@
     <title>{{Website.Title}}</title>
     <meta charset="UTF-8">
     <meta name="author" content="Tim Seifert">
-    <link rel="stylesheet" href="{% static 'bwp_layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bwp_layout.css' %}">
     <link rel="stylesheet" href="{% static 'css/standard_style.css' %}">
     {% if Website.Menu %}
-    <link rel="stylesheet" href="{% static 'bwp_menu.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bwp_menu.css' %}">
     {% endif %}
     <link rel="icon" href="{% static 'icon/' %}{{Website.Favicon}}">
     {% for style in Website.Styles %}
@@ -17,10 +17,10 @@
     {% block head %}
     {% endblock %}
 </head>
-<script src="{% static 'bwp_general.js' %}"></script>
-<script src="{% static 'bwp_layout.js' %}" defer></script>
+<script src="{% static 'js/bwp_general.js' %}"></script>
+<script src="{% static 'js/bwp_layout.js' %}" defer></script>
 {% if Website.Menu %}
-<script src="{% static 'bwp_menu.js' %}" defer></script>
+<script src="{% static 'js/bwp_menu.js' %}" defer></script>
 {% endif %}
 <body>
     <div class="bwp-{% if Website.Sidebar %}sidebar{% else %}compact{% endif %}-layout-container">
