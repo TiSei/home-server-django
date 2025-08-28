@@ -1,7 +1,7 @@
-<div class="part image-container">
+<div class="part bwp-image-container">
     {% with item.get_img_url as img_url %}
     {% if img_url %}
-        <img src="{{item.get_img_url}}" />
+        <img class="bwp-image-zoom" src="{{item.get_img_url}}" />
     {% endif %}
     {% endwith %}
     <div class="text-content">

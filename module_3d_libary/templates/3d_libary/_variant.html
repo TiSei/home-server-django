@@ -1,8 +1,8 @@
 {% load static %}
 
-<div class="variant image-container">
+<div class="variant bwp-image-container">
     {% if item.image %}
-    <img src="{{item.image.url}}" />
+    <img class="bwp-image-zoom" src="{{item.image.url}}" />
     {% endif %}
     <div class="text-content">
         <h3>

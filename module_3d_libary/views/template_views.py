@@ -15,7 +15,7 @@ def get_3d_libary_weppage_attr(menu = True):
         'Icon': config.icon,
     }
     if menu:
-        attrs['Menu'] = '&quot;/3D_Libary/menu.json&quot;'
+        attrs['Menu'] = '/3D_Libary/menu.json'
     return attrs
 
 def menu(request):
