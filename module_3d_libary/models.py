@@ -1,6 +1,7 @@
 from django.db import models
-from django.utils import timezone
 from django.core.validators import RegexValidator, FileExtensionValidator
+from models.base_models import DBObject, FileCleanupMixin
+
 
 HEX_COLOR_VALIDATOR = RegexValidator(
     regex=r'^#([A-Fa-f0-9]{6})$',
@@ -11,20 +12,6 @@ VERSION_VALIDATOR = RegexValidator(
     regex=r'^\d+\.\d{1,2}$',
     message='Version muss eine valide Versionsbezeichnung sein, z.B. 1.1',
 )
-
-class DBObject(models.Model):
-    # id generated automatic
-    last_modified = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(editable=False)
-
-    class Meta:
-        abstract = True
-
-    def save(self, *args, **kwargs):
-        if not self.pk and not self.created:
-            self.created = timezone.now()
-        super().save(*args, **kwargs)
-
 
 class Tag_Group(DBObject):
     name = models.CharField(max_length=40, unique=True)
@@ -82,7 +69,8 @@ class Part(DBObject):
             return last_modified_variant.image.url
         return None
 
-class Variant(DBObject):
+class Variant(FileCleanupMixin, DBObject):
+    file_fields = ['image','fc_file','stl_file']
     name = models.CharField(max_length=40)
     version = models.CharField(max_length=4, validators=[VERSION_VALIDATOR])
     notice = models.CharField(max_length=200, blank=True, null=True)

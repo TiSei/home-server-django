@@ -1,4 +1,5 @@
 from django import forms
+from DJango_Home_Server.views.widgets import CustomFileInput, ShowImageInput
 from .models import Variant, Part, Project, Tag, Tag_Group, Print_Profil
 
 class TagForm(forms.ModelForm):
@@ -44,4 +45,9 @@ class VariantForm(forms.ModelForm):
             'stl_file':'STL-Datei',
             'part':'Projekt',
             'printprofil':'Druckprofil'
+            }
+        widgets = {
+            "image": ShowImageInput(attrs={"class": "custom-file-input"}),
+            "fc_file": CustomFileInput(attrs={"class": "custom-file-input"}),
+            "stl_file": CustomFileInput(attrs={"class": "custom-file-input"}),
             }

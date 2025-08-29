@@ -1,0 +1,34 @@
+<div class="file-input-wrapper bwp-image-container">
+    {% if widget.value %}
+    <img src="{{ widget.value.url }}"/>
+    {% else %}
+    <img class="bwp-none"/>
+    {% endif %}
+    <div class="bwp-image-content">
+        <input type="file" name="{{ widget.name }}" {% include "django/forms/widgets/attrs.html" %}>
+        {% if not widget.required %}
+        <label for="{{ widget.checkbox_id }}">{{ widget.clear_checkbox_label }}</label>
+        <input type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
+        {% endif %}
+    </div>
+    <script>
+        function updatePreview() {
+            const input = document.querySelector('input[name={{widget.name}}]');
+            input.addEventListener("change", function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const img = input.parentElement.parentElement.querySelector('img');
+                    img.classList.toggle('bwp-none', false);
+                    if (!img) return;
+                    const reader = new FileReader();
+                    reader.onload = function (ev) {
+                        img.src = ev.target.result;
+                        img.style.display = "inline-block";
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        updatePreview();
+    </script>
+</div>

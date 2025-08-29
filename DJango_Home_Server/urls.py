@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.apps import apps
 from django.conf import settings
 from django.conf.urls.static import static
-from views.server_views import IndexTemplateView
+from DJango_Home_Server.views.server_views import IndexTemplateView
 
 urlpatterns = [
     path('',IndexTemplateView.as_view(),name='index'),

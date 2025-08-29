@@ -33,30 +33,30 @@
     margin-bottom: 20px;
 }
 
-.form-rows p {
+.form-rows > p {
     display: contents;
 }
 
-.form-rows label {
+.form-rows > label {
     padding-top: 4px;
     text-align: right;
 }
 
-.form-rows input,
-.form-rows textarea,
-.form-rows select {
+.form-rows > input,
+.form-rows > textarea,
+.form-rows > select {
     width: 100%;
 }
 
-.form-rows textarea {
+.form-rows > textarea {
     max-height: 100px;
 }
 
-.form-rows input {
+.form-rows > input {
     min-height: 22px;
 }
 
-.form-rows select {
+.form-rows > select {
     min-height: 28px;
 }
 
@@ -91,4 +91,21 @@
 
 .pagination > .forward-page {
     margin-left: 16px;
+}
+
+/* widgets */
+.file-input-wrapper {
+    gap: 5px;
+}
+
+.file-input-wrapper > input {
+    width: inherit;
+}
+
+.file-input-wrapper input[type=file] {
+    width: calc(100% - 10rem);
+}
+
+.file-input-wrapper > img {
+    max-width: 30%;
 }
